@@ -1,18 +1,24 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import AuthContext from '../context/AuthProvider'
+import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
 import '../styles/AuthForm.css';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 
 const LOGIN_URL = '/Auth/Login'
+const USER_ROLE_DATA_URL = '/api/user/User/role'
 const Login = () =>{
-    const {setAuth} = useContext(AuthContext);
+    const {setAuth} = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success,setSuccess] = useState('');
 
     useEffect(()=>{
         userRef.current.focus();
@@ -30,16 +36,23 @@ const Login = () =>{
                 JSON.stringify({email, password: pwd}),
                 {
                     headers: { 'Content-Type' : 'application/json'},
-                    withCredentials: ''
+                    withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({email,pwd,roles,accessToken});
+            const accessToken = response?.data?.data;
+            if(!!accessToken)
+                localStorage.setItem("user",accessToken);
+            const getUserRole = await axios.get(USER_ROLE_DATA_URL,{
+                headers: {
+                    'Accept': 'text/plain',
+                    'Authorization' : `bearer ${localStorage.getItem("user")}`
+                    }
+            });
+            const {role} = getUserRole.data.data;
+            setAuth({accessToken,role});
             setEmail('');
             setPwd('');
-            setSuccess(true);
+            navigate(from,{replace: true});
         } catch (err) {
             if(!err?.response)
                 setErrMsg('No server Respones');
@@ -56,16 +69,6 @@ const Login = () =>{
     }
 
     return(
-        <>
-        {success ? (
-            <section>
-                <h1>You are logged in!</h1>
-                <br/>
-                <p>
-                    <a href="#">Go to Home</a>
-                </p>
-            </section>
-        ) : (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                 {errMsg}
@@ -98,8 +101,7 @@ const Login = () =>{
                     <a href="#">Sign Up</a>
                 </span>
             </p>
-        </section>)}
-        </>
+        </section>
     )
 }
 export default Login;

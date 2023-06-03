@@ -20,7 +20,6 @@ const CarList = () =>{
         })()
     },[])
 
-    console.log({carsData})
     return (
         <div>
             <ul>

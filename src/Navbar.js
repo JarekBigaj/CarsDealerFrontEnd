@@ -1,14 +1,34 @@
 import { Link, useMatch, useResolvedPath} from "react-router-dom";
 import './styles/Navbar.css'
+import useAuth from "./hooks/useAuth";
 
 const Navbar = () => {
+    const {auth,setAuth} = useAuth();
+    const {accessToken,role} = auth;
     return (
         <div className="navbar">
             <Link className="site-title navbar-link" to="/">Cars Dealer</Link>
             <ul className="navbar-list">
                 <CustomLink to={"/"}>Home</CustomLink>
-                <CustomLink to={"/login"}>Login</CustomLink>
-                <CustomLink to={"/register"}>Register</CustomLink>
+                {role === 'User'?
+                    <CustomLink to={"/offer"}>Offer</CustomLink>
+                    :
+                    <></>
+                }
+                {!auth?
+                    <>
+                        <CustomLink to={"/login"}>Login</CustomLink>
+                        <CustomLink to={"/register"}>Register</CustomLink> 
+                    </> 
+                    :
+                    <>
+                        <Link to={"/"} className={`navbar-logout`} onClick={() => {
+                            localStorage.removeItem("user");
+                            setAuth('');
+                        }}>Logout</Link>
+                    </>
+                }
+                
             </ul>
         </div>
     )

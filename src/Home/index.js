@@ -1,4 +1,5 @@
-import CarList from "./CarList";
+import useAuth from "../hooks/useAuth";
+import CarList from "../Car/CarList";
 
 
 const Home = () =>{
