@@ -4,18 +4,21 @@ import useAuth from "./hooks/useAuth";
 
 const Navbar = () => {
     const {auth,setAuth} = useAuth();
-    const {accessToken,role} = auth;
+    const {accessToken,roles} = auth;
     return (
         <div className="navbar">
             <Link className="site-title navbar-link" to="/">Cars Dealer</Link>
             <ul className="navbar-list">
                 <CustomLink to={"/"}>Home</CustomLink>
-                {role === 'User'?
-                    <CustomLink to={"/offer"}>Offer</CustomLink>
+                {roles === 'User'?
+                    <>
+                        <CustomLink to={"/offer"}>Your Offers</CustomLink>
+                        <CustomLink to={"/transaction"}>Your Transactions</CustomLink>
+                    </>
                     :
                     <></>
                 }
-                {!auth?
+                {!auth || !localStorage.getItem("user")?
                     <>
                         <CustomLink to={"/login"}>Login</CustomLink>
                         <CustomLink to={"/register"}>Register</CustomLink> 

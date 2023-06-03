@@ -1,13 +1,13 @@
 import React, { useState,useEffect, useContext } from 'react'
 import axios from '../api/axios';
 import useAuth, { accessToken } from '../hooks/useAuth';
-import AuthContext, { AuthProvider } from '../context/AuthProvider';
+import CustomTable from '../helperComponents/CustomTable';
+import { getTableColumnName, getTableColumnNameForOffers } from '../helperFunctions/tableHelper';
 
 const URL_OFFER = '/api/offer/Offer/GetAll';
 const Offer = () => {
   const [offers, setOffers] = useState();
   const {auth} = useAuth();
-  console.log({auth})
 
   useEffect(() => {
     (async () =>{
@@ -18,28 +18,36 @@ const Offer = () => {
             'Authorization' : accessToken()
           }
         });
-        setOffers(response.data.data);
+        setOffers(() => response.data.data);
+        console.log({response})
       } catch (err){
         console.error(err);
       }
     })()
 
   },[])
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = (await axios.get(URL_CAR+));
+  //     if(response.status !== 200) throw new console.error(`It's something go wrong`);
+  //     const dataFromResponse = response.data;
+  //     const {data} = dataFromResponse;
+  //     setCurrentCar(() =>{
+  //         return data;
+  //     });
+  // })()
+  // },[offers])
+  const propsName = getTableColumnName(offers);
+  console.log({offers})
 
   return (
-    <article>
-      <h2>Offers List</h2>
-      {offers?.length
-        ?(
-          <ul>
-            {offers.map((offer,i) => 
-              <li key={i}>
-                {offer?.proposedAmount}
-              </li>)}
-          </ul>
-        ): <p>No offer to display</p>
-      } 
-    </article>
+      <div>
+            <CustomTable 
+                props={offers} 
+                propsName={propsName} 
+                title={"Your Offers List"}
+            />
+      </div>
   )
 }
 

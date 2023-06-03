@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
 import '../styles/AuthForm.css';
@@ -49,7 +49,7 @@ const Login = () =>{
                     }
             });
             const {role} = getUserRole.data.data;
-            setAuth({accessToken,role});
+            setAuth({accessToken,roles : role, email});
             setEmail('');
             setPwd('');
             navigate(from,{replace: true});

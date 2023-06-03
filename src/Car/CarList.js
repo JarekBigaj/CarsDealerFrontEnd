@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
+import CustomTable from "../helperComponents/CustomTable";
+import { getTableColumnName } from "../helperFunctions/tableHelper";
 
 const URL_CARS = '/api/Car/GetAll';
 
@@ -8,36 +10,33 @@ const CarList = () =>{
     const [msg, setMsg] = useState();
     const [isSuccess, setIsSuccess] = useState();
 
+
     useEffect(()=>{
         (async () => {
             const response = (await axios.get(URL_CARS));
             if(response.status !== 200) throw new console.error(`It's something go wrong`);
             const dataFromResponse = response.data;
             const {data,message,success} = dataFromResponse;
-            setCarsData(data);
+            console.log({dataFromResponse})
+            setCarsData(() =>{
+                const filteredData = data.filter(value => !value.purchase)
+                const selectedProps = filteredData.map(({ purchase, ...rest }) => rest);
+                return selectedProps;
+            });
             setMsg(message);
             setIsSuccess(success);
         })()
     },[])
+    const propsName = getTableColumnName(carsData);
 
     return (
         <div>
-            <ul>
-                {
-                    carsData.map((car) => {
-                        const {id,make,model,millage,price,year} = car;
-                        return(
-                            <li key={id}>
-                                Make: {make} <br/>
-                                Model: {model} <br/>
-                                Price: {price} <br/>
-                                Year: {year} <br/>
-                                Millage: {millage}<br/>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <CustomTable 
+                props={carsData} 
+                propsName={propsName} 
+                title={"Cars List"}
+                to={'car'}
+            />
         </div>
     )
 }
