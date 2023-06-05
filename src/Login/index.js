@@ -40,12 +40,10 @@ const Login = () =>{
                 }
             );
             const accessToken = response?.data?.data;
-            if(!!accessToken)
-                localStorage.setItem("user",accessToken);
             const getUserRole = await axios.get(USER_ROLE_DATA_URL,{
                 headers: {
                     'Accept': 'text/plain',
-                    'Authorization' : `bearer ${localStorage.getItem("user")}`
+                    'Authorization' : `bearer ${accessToken}`
                     }
             });
             const {role} = getUserRole.data.data;
@@ -98,7 +96,7 @@ const Login = () =>{
             <p>
                 Need an Account?<br/>
                 <span className="line">
-                    <a href="#">Sign Up</a>
+                    <Link to={'/registration'}>Sign Up</Link>
                 </span>
             </p>
         </section>

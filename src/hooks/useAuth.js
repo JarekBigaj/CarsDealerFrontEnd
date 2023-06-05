@@ -5,8 +5,8 @@ const useAuth = () =>{
     return useContext(AuthContext);
 }
 
-export const accessToken = () =>{
-    return `bearer ${localStorage.getItem("user")}`;
+export const accessToken = (token) =>{
+    return `bearer ${token}`;
 }
 
 export default useAuth;

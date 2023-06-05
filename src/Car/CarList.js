@@ -10,6 +10,8 @@ const CarList = () =>{
     const [msg, setMsg] = useState();
     const [isSuccess, setIsSuccess] = useState();
     const [showPage,setShowPage] = useState(1);
+    const [currentPage,setCurrentPage] = useState();
+    const [pages, setPages] = useState();
 
 
     useEffect(()=>{
@@ -25,6 +27,7 @@ const CarList = () =>{
                 return selectedProps;
             });
             setMsg(message);
+            
             setIsSuccess(success);
         })()
     },[])
