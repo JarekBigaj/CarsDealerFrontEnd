@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import CustomTable from "../helperComponents/CustomTable";
 import { getTableColumnName } from "../helperFunctions/tableHelper";
+import Pagination from '../helperComponents/Pagination';
 
 const URL_CARS = '/api/Car/GetAll';
 
@@ -26,21 +27,34 @@ const CarList = () =>{
                 const selectedProps = filteredData.map(({ purchase, ...rest }) => rest);
                 return selectedProps;
             });
+            setCurrentPage(currentPage);
+            setPages(pages);
             setMsg(message);
-            
             setIsSuccess(success);
         })()
-    },[])
+    },[showPage])
     const propsName = getTableColumnName(carsData);
-
+    const handleChangePage = (page) =>{
+        setShowPage(page);
+    }
     return (
         <div>
-            <CustomTable 
-                props={carsData} 
-                propsName={propsName} 
-                title={"Cars List"}
-                to={'car'}
-            />
+            {carsData.length?(
+                <div>
+                    <CustomTable 
+                        props={carsData} 
+                        propsName={propsName} 
+                        title={"Cars List"}
+                        to={'car'}
+                    />
+                    <Pagination pages={pages} currentPage={currentPage} handleChangeCurrentPage={handleChangePage}/>
+                </div>
+            ) :(
+                <div><span>Lodaing ...</span></div>
+            )
+
+            }
+            
         </div>
     )
 }
