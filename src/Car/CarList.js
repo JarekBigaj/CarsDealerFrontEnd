@@ -12,7 +12,7 @@ const CarList = () =>{
     const [isSuccess, setIsSuccess] = useState();
     const [showPage,setShowPage] = useState(1);
     const [currentPage,setCurrentPage] = useState();
-    const [pages, setPages] = useState();
+    const [pages, setPages] = useState(0);
 
 
     useEffect(()=>{
@@ -37,6 +37,12 @@ const CarList = () =>{
     const handleChangePage = (page) =>{
         setShowPage(page);
     }
+    const arrowPageChange = (arrow) => {
+        if(arrow === "left"&& showPage>1)
+            setShowPage((prev) => prev-1);
+        if(arrow === "right"&& showPage<pages)
+            setShowPage((prev)=>prev+1);
+    }
     return (
         <div>
             {carsData.length?(
@@ -47,7 +53,12 @@ const CarList = () =>{
                         title={"Cars List"}
                         to={'car'}
                     />
-                    <Pagination pages={pages} currentPage={currentPage} handleChangeCurrentPage={handleChangePage}/>
+                    <Pagination 
+                        pages={pages} 
+                        currentPage={currentPage} 
+                        handleChangeCurrentPage={handleChangePage}
+                        arrowPageChange={arrowPageChange}
+                    />
                 </div>
             ) :(
                 <div><span>Lodaing ...</span></div>

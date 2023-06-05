@@ -18,7 +18,7 @@ const Navbar = () => {
                     :
                     <></>
                 }
-                {!auth || !localStorage.getItem("user")?
+                {!auth?
                     <>
                         <CustomLink to={"/login"}>Login</CustomLink>
                         <CustomLink to={"/register"}>Register</CustomLink> 

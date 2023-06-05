@@ -1,18 +1,19 @@
-import React, { useState,useEffect, useContext } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from '../api/axios';
-import { accessToken } from '../hooks/useAuth';
+import useAuth,{accessToken} from '../hooks/useAuth';
+
 
 const URL_PURCHASE = '/controller';
 const Transaction = () => {
   const [transactions, setTransactions] = useState();
-
+  const {auth} = useAuth();
   useEffect(() => {
     (async () =>{
       try{
         const response = await axios.get(URL_PURCHASE,{
           headers: {
             'Accept': 'text/plain',
-            'Authorization' : accessToken()
+            'Authorization' : accessToken(auth.accessToken)
           }
         });
         setTransactions(response.data.data);

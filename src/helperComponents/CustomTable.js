@@ -16,7 +16,6 @@ const CustomTable = ({props,propsName,to,title}) => {
                             {propsName.map((value)=> {
                                 if(value!=="id")
                                   return <th key={value}>{value}</th>
-                                return <></>
                                 }
                             )}
                         </tr>
@@ -32,7 +31,6 @@ const CustomTable = ({props,propsName,to,title}) => {
                                     Object.entries(element).map(([key,value])=>{
                                       if(value !== element.id)
                                         return <td data-cell={key} key={value+key+"cell"}>{value}</td>
-                                      return <></>;
                                     })
                                   }
                                 </tr>

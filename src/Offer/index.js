@@ -6,7 +6,7 @@ import { getTableColumnName, getTableColumnNameForOffers } from '../helperFuncti
 
 const URL_OFFER = '/api/offer/Offer/GetAll';
 const Offer = () => {
-  const [offers, setOffers] = useState();
+  const [offers, setOffers] = useState([]);
   const {auth} = useAuth();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Offer = () => {
         const response = await axios.get(URL_OFFER,{
           headers: {
             'Accept': 'text/plain',
-            'Authorization' : accessToken()
+            'Authorization' : accessToken(auth.accessToken)
           }
         });
         setOffers(() => response.data.data);
@@ -26,27 +26,24 @@ const Offer = () => {
     })()
 
   },[])
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = (await axios.get(URL_CAR+));
-  //     if(response.status !== 200) throw new console.error(`It's something go wrong`);
-  //     const dataFromResponse = response.data;
-  //     const {data} = dataFromResponse;
-  //     setCurrentCar(() =>{
-  //         return data;
-  //     });
-  // })()
-  // },[offers])
+
   const propsName = getTableColumnName(offers);
-  console.log({offers})
 
   return (
       <div>
-            <CustomTable 
+        {offers.length?(
+            <div>
+              <CustomTable 
                 props={offers} 
                 propsName={propsName} 
                 title={"Your Offers List"}
-            />
+              />
+            </div>
+          ) :(
+            <div><span>You don't have any offers!</span></div>
+          )
+        }
+            
       </div>
   )
 }
