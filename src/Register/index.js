@@ -3,6 +3,7 @@ import {faCheck,faTimes,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import '../styles/AuthForm.css';
 import axios from "../api/axios";
+import { Link } from "react-router-dom";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -174,7 +175,7 @@ const Register = () =>{
             <p>
                 Already registered?<br/>
                 <span className="line">
-                    <a href="#">Sign In</a>
+                    <Link to={'/login'}>Sign In</Link>
                 </span>
             </p>
         </section>)}

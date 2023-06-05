@@ -9,17 +9,18 @@ const CarList = () =>{
     const [carsData, setCarsData] = useState([]);
     const [msg, setMsg] = useState();
     const [isSuccess, setIsSuccess] = useState();
+    const [showPage,setShowPage] = useState(1);
 
 
     useEffect(()=>{
         (async () => {
-            const response = (await axios.get(URL_CARS));
+            const response = (await axios.get(URL_CARS+`/${showPage}`));
             if(response.status !== 200) throw new console.error(`It's something go wrong`);
             const dataFromResponse = response.data;
             const {data,message,success} = dataFromResponse;
-            console.log({dataFromResponse})
+            const {items,pages,currentPage} = data;
             setCarsData(() =>{
-                const filteredData = data.filter(value => !value.purchase)
+                const filteredData = items.filter(value => !value.purchase)
                 const selectedProps = filteredData.map(({ purchase, ...rest }) => rest);
                 return selectedProps;
             });
