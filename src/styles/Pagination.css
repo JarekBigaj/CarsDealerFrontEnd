@@ -63,3 +63,6 @@
   .pagination-arrow.left:hover {
     transform: rotate(135deg) scale(1.2);
   }
+  @media (max-width: 650px) {
+    
+  }

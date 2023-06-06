@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5071'
-// const BASE_URL = 'https://carsdealerapi.azurewebsites.net'
+// const BASE_URL = 'http://localhost:5071'
+const BASE_URL = 'https://carsdealerapi.azurewebsites.net'
 
 
 export default axios.create({
