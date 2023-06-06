@@ -1,6 +1,11 @@
 
 .table-wrapper{
     width: min(900px, 100% - 3rem);
+    position: absolute;
+    top:80px;
+    left: 0;
+    right: 0;
+    bottom: 10px;
     margin-inline: auto;
     color:white;
 }
@@ -24,6 +29,7 @@ td {
   th {
     text-align: left;
     pointer-events:none;
+    text-transform: uppercase;
   }
 
   caption {
@@ -34,7 +40,6 @@ td {
     border-radius:15px 15px 0 0;
     font-size: 1,5rem;
     font-weight: 700;
-    text-transform: uppercase;
     text-shadow: 
       0 0 0.125em hsl(0 0% 100% / 0.3),
       0 0 0.45em currentColor;
@@ -75,10 +80,9 @@ td {
     td::before{
       content: attr(data-cell) ": ";
       font-weight:700;
-      text-transforme: capitalize;
+      text-transform: capitalize;
       
     }
-
 
   }
   tr{
@@ -86,5 +90,8 @@ td {
   }
   tr:hover{
     background:hsl(0 0% 0% /0.8);
+  }
+  .isOffer{
+    cursor: auto;
   }
   

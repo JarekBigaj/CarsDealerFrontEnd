@@ -1,7 +1,7 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { getQueryParamsId } from '../helperFunctions/queryParamsHelper';
 import axios from '../api/axios';
-import { accessToken } from '../hooks/useAuth';
+import useAuth, { accessToken } from '../hooks/useAuth';
 import {useNavigate} from 'react-router-dom'
 
 
@@ -10,6 +10,7 @@ const URL_OFFER = '/api/offer/Offer/';
 const MakeAnOffer = () => {
     const [currentCar,setCurrentCar] = useState();
     const [proposedAmount, setProposedAmount] = useState();
+    const {auth} = useAuth();
 
     const amountRef = useRef();
 
@@ -41,7 +42,7 @@ const MakeAnOffer = () => {
                     headers: {
                         'Content-Type' : 'application/json',
                         'Accept': 'text/plain',
-                        'Authorization' : accessToken()
+                        'Authorization' : accessToken(auth.accessToken)
                     },
                     withCredentials: true
                 }
@@ -68,6 +69,7 @@ const MakeAnOffer = () => {
                     type='text'
                     onChange={(e) => setProposedAmount(e.target.value)}
                     value={proposedAmount}
+                    placeholder={price}
                 />  
                 <button>Confirm</button>
             </form>

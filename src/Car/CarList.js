@@ -33,6 +33,8 @@ const CarList = () =>{
             setIsSuccess(success);
         })()
     },[showPage])
+
+    
     const propsName = getTableColumnName(carsData);
     const handleChangePage = (page) =>{
         setShowPage(page);

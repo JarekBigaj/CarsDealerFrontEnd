@@ -4,7 +4,7 @@ import useAuth, { accessToken } from '../hooks/useAuth';
 import CustomTable from '../helperComponents/CustomTable';
 import { getTableColumnName, getTableColumnNameForOffers } from '../helperFunctions/tableHelper';
 
-const URL_OFFER = '/api/offer/Offer/GetAll';
+const URL_OFFER = '/api/offer/Offer/GetAllCarsOffer';
 const Offer = () => {
   const [offers, setOffers] = useState([]);
   const {auth} = useAuth();
@@ -18,8 +18,15 @@ const Offer = () => {
             'Authorization' : accessToken(auth.accessToken)
           }
         });
-        setOffers(() => response.data.data);
-        console.log({response})
+        const {data} = response.data;
+        const selectOffersData = data?.map((value) => {
+          const {id,make,model,price,offers} = value;
+          const [lastOffer] = offers?.slice(-1);
+          const idOffer = lastOffer.id;
+          const {proposedAmount,isAcepted} = lastOffer;
+          return {id,make,model,price,idOffer,proposedAmount,isAcepted};
+        });
+        setOffers(()=>selectOffersData);
       } catch (err){
         console.error(err);
       }
@@ -28,6 +35,12 @@ const Offer = () => {
   },[])
 
   const propsName = getTableColumnName(offers);
+  const changedPropsName = propsName.map(name => {
+    if(name === "idOffer") return "Id Your Offer";
+    if(name === "proposedAmount") return "Your Propoused Price";
+    if(name === "isAcepted") return "Status";
+    return name;
+  })
 
   return (
       <div>
@@ -35,8 +48,9 @@ const Offer = () => {
             <div>
               <CustomTable 
                 props={offers} 
-                propsName={propsName} 
+                propsName={changedPropsName} 
                 title={"Your Offers List"}
+                isOffer={true}
               />
             </div>
           ) :(

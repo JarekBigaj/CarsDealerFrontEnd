@@ -18,7 +18,7 @@ const Navbar = () => {
                     :
                     <></>
                 }
-                {!auth?
+                {!accessToken?
                     <>
                         <CustomLink to={"/login"}>Login</CustomLink>
                         <CustomLink to={"/register"}>Register</CustomLink> 
@@ -26,7 +26,6 @@ const Navbar = () => {
                     :
                     <>
                         <Link to={"/"} className={`navbar-logout`} onClick={() => {
-                            localStorage.removeItem("user");
                             setAuth('');
                         }}>Logout</Link>
                     </>

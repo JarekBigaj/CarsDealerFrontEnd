@@ -34,15 +34,11 @@ const Register = () =>{
 
     useEffect(()=>{
         const result =  EMAIL_REGEX.test(email);
-        console.log({result});
-        console.log({email});
         setValidEmail(result);
     },[email]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(password);
-        console.log({result});
-        console.log({password});
         setValidPassword(result);
         const match = password === matchPassword;
         setValidMatch(match);
@@ -66,7 +62,6 @@ const Register = () =>{
                 {
                     headers:{'Content-Type':'application/json'}
                 });
-            console.log({response});
             setSuccess(true);
         }catch(err){
             if(!err.response) setErrMsg('No Server Response');
