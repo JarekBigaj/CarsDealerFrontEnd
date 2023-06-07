@@ -3,13 +3,16 @@ import { getQueryParamsId } from '../helperFunctions/queryParamsHelper';
 import axios from '../api/axios';
 import useAuth, { accessToken } from '../hooks/useAuth';
 import {useNavigate} from 'react-router-dom'
+import '../styles/MakeAnOffer.css'
 
 
 const URL_CAR = '/api/Car/';
 const URL_OFFER = '/api/offer/Offer/';
+const OFFER_REGEX = /^\d{1,10}$/;
 const MakeAnOffer = () => {
     const [currentCar,setCurrentCar] = useState();
     const [proposedAmount, setProposedAmount] = useState();
+    const [errMsg, setErrMsg] = useState('');
     const {auth} = useAuth();
 
     const amountRef = useRef();
@@ -34,6 +37,11 @@ const MakeAnOffer = () => {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        const result = OFFER_REGEX.test(proposedAmount);
+        if(!result){
+            setErrMsg("Invalid Entry");
+            return
+        }
         
         try{
             const response = await axios.post(URL_OFFER+paramsId, 
@@ -47,7 +55,7 @@ const MakeAnOffer = () => {
                     withCredentials: true
                 }
             );
-
+            navigate('/offer')
         } catch (err) {
             console.error(err);
         }
@@ -55,24 +63,27 @@ const MakeAnOffer = () => {
     const {make,model,price} = currentCar ? currentCar:'';
 
   return (
-    <div>
-        <h1>Make an Offer</h1>
-        <h2>{make} {model}</h2>
-        <div className='price-offer'>
-            <label>Price: {price}$</label>
-            <br/>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='proposedAmount'>Your Offer:</label>
-                <input 
-                    id="proposedAmount"
-                    ref={amountRef}
-                    type='text'
-                    onChange={(e) => setProposedAmount(e.target.value)}
-                    value={proposedAmount}
-                    placeholder={price}
-                />  
-                <button>Confirm</button>
-            </form>
+    <div className='card-wrapper'>
+        <div className='component-wrapper'>
+            <h1 className='title-offer'>Make an Offer</h1>
+            <h2 className='cars-offer-name'>{make} {model}</h2>
+            <div className='price-offer'>
+                <label className='offer-price'>Price: {price}$</label>
+                <br/>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor='proposedAmount' className='your-offer'>Your Offer:</label>
+                    <input 
+                        id="proposedAmount"
+                        ref={amountRef}
+                        type='text'
+                        onChange={(e) => setProposedAmount(() => e.target.value)}
+                        value={proposedAmount}
+                        placeholder={price}
+                        className='input-offer-field'
+                    />  
+                    <button className='confirm-button'>Confirm</button>
+                </form>
+            </div>
         </div>
     </div>
   )

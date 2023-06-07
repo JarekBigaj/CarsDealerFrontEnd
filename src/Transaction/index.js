@@ -3,7 +3,7 @@ import axios from '../api/axios';
 import useAuth,{accessToken} from '../hooks/useAuth';
 
 
-const URL_PURCHASE = '/controller';
+const URL_PURCHASE = '/api/Purchase';
 const Transaction = () => {
   const [transactions, setTransactions] = useState();
   const {auth} = useAuth();

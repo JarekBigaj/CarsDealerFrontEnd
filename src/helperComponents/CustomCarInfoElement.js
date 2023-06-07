@@ -1,5 +1,6 @@
 import React from 'react'
 import useAuth from '../hooks/useAuth';
+import '../styles/CardInfo.css'
 import {useNavigate} from 'react-router-dom'
 
 const CustomCarInfoElement = ({props,paramsId}) => {
@@ -8,7 +9,8 @@ const CustomCarInfoElement = ({props,paramsId}) => {
 
     
   return (
-        <div className='wrapper'>
+    <div className='wrapper'>
+        <div className='component'>
             {props ? (
                 <div className='card-field'>
                     <div className='title'><label>{make} {model}</label></div>
@@ -25,12 +27,16 @@ const CustomCarInfoElement = ({props,paramsId}) => {
                         <button className='offer-button' onClick={() => navigate(`/makeanoffer?id=${paramsId}`)}>
                             Make an Offer
                         </button>
+                        <button className='offer-button' onClick={() => navigate(`/finallytransaction?id=${paramsId}`)}>
+                            Buy It
+                        </button>
                     </div>
                 </div>
             ) : (
                 <div className='loading-field'><span className='loading'>Loading...</span></div>
             )}
         </div>
+    </div>
   )
 }
 

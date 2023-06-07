@@ -3,6 +3,7 @@ import CustomInfoElement from '../helperComponents/CustomCarInfoElement'
 import { getQueryParamsId } from '../helperFunctions/queryParamsHelper'
 import axios from '../api/axios';
 
+
 const URL_CAR = '/api/Car/';
 
 const CarInfo = () => {

@@ -11,6 +11,7 @@ import CarInfo from './Car/CarInfo';
 import RequireAuth from './RequireAuth';
 import MakeAnOffer from './Offer/MakeAnOffer';
 import Unauthorized from './Unauthorized';
+import FinallyTransaction from './Transaction/FinallyTransaction';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='Offer' element={<Offer/>}/>
           <Route path='Transaction' element={<Transaction/>}  />
           <Route path='makeanoffer' element = {<MakeAnOffer/>}/>
+          <Route path='finallytransaction' element = {<FinallyTransaction/>}/>
         </Route>
       </Route>
     </Routes>

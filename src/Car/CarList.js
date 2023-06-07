@@ -22,6 +22,7 @@ const CarList = () =>{
             const dataFromResponse = response.data;
             const {data,message,success} = dataFromResponse;
             const {items,pages,currentPage} = data;
+            console.log({response})
             setCarsData(() =>{
                 const filteredData = items.filter(value => !value.purchase)
                 const selectedProps = filteredData.map(({ purchase, ...rest }) => rest);

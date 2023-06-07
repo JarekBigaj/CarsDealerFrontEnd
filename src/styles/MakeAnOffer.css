@@ -1,0 +1,79 @@
+/* Card Wrapper */
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+  
+  /* Component Wrapper */
+  .component-wrapper {
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Title Offer */
+  .title-offer {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: #ffcc00;
+  }
+  
+  /* Cars Offer Name */
+  .cars-offer-name {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  /* Price Offer */
+  .price-offer {
+    margin-bottom: 20px;
+  }
+  
+  /* Offer Price */
+  .offer-price {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #ffcc00;
+  }
+  
+  /* Your Offer */
+  .your-offer {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Input Offer Field */
+  .input-offer-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #333;
+  }
+  
+  /* Confirm Button */
+  .confirm-button {
+    background-color: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #ffa500;
+  }
+  
