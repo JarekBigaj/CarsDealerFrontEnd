@@ -1,17 +1,8 @@
 
-.table-wrapper{
-    width: min(900px, 100% - 3rem);
-    position: absolute;
-    top:80px;
-    left: 0;
-    right: 0;
-    bottom: 10px;
-    margin-inline: auto;
-    color:white;
-}
+
 
 table{
-    width:100%;
+    min-width:100%;
     border-collapse:collapse;
     background-color:#323232;
     margin-top:1.5rem;
@@ -33,12 +24,11 @@ td {
   }
 
   caption {
-    font-size: 1.5em;
     font-weight: 700;
     background: hsl(0 0% 0%);
     border: var(--clr-neon) solid 1px;
     border-radius:15px 15px 0 0;
-    font-size: 1,5rem;
+    font-size: 1.5em;
     font-weight: 700;
     text-shadow: 
       0 0 0.125em hsl(0 0% 100% / 0.3),

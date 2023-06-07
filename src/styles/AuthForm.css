@@ -1,5 +1,6 @@
 section {
     width: 100%;
+    margin-top: 3em;
     max-width: 420px;
     min-height: 400px;
     display: flex;
@@ -38,7 +39,12 @@ button {
 }
 
 button {
-  padding: 0.5rem;
+    background-color: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 .instructions {

@@ -1,0 +1,10 @@
+.table-wrapper{
+    width: min(900px, 100% - 3rem);
+    position: absolute;
+    top: 2em;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    margin-inline: auto;
+    color:white;
+}

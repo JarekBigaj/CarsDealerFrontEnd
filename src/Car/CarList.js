@@ -3,6 +3,7 @@ import axios from "../api/axios";
 import CustomTable from "../helperComponents/CustomTable";
 import { getTableColumnName } from "../helperFunctions/tableHelper";
 import Pagination from '../helperComponents/Pagination';
+import '../styles/CarList.css'
 
 const URL_CARS = '/api/Car/GetAll';
 
@@ -22,7 +23,6 @@ const CarList = () =>{
             const dataFromResponse = response.data;
             const {data,message,success} = dataFromResponse;
             const {items,pages,currentPage} = data;
-            console.log({response})
             setCarsData(() =>{
                 const filteredData = items.filter(value => !value.purchase)
                 const selectedProps = filteredData.map(({ purchase, ...rest }) => rest);
@@ -47,7 +47,7 @@ const CarList = () =>{
             setShowPage((prev)=>prev+1);
     }
     return (
-        <div>
+        <div className="table-wrapper">
             {carsData.length?(
                 <div>
                     <CustomTable 
@@ -56,6 +56,7 @@ const CarList = () =>{
                         title={"Cars List"}
                         to={'car'}
                     />
+
                     <Pagination 
                         pages={pages} 
                         currentPage={currentPage} 

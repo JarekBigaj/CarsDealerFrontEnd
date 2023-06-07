@@ -4,6 +4,7 @@ import { getQueryParamsId } from '../helperFunctions/queryParamsHelper';
 import axios from '../api/axios';
 import { accessToken } from '../hooks/useAuth';
 import useAuth from '../hooks/useAuth';
+import '../styles/CardInfo.css'
 
 const URL_CAR = '/api/Car/';
 const URL_PURCHASE = '/api/Purchase';
@@ -50,17 +51,19 @@ const FinallyTransaction = () => {
     }
 
   return (
-    <div>
-        <div>
-            <h1>Do you wanna Buy this car ?</h1>
-            <h2>{`${car.make} ${car.model}`}</h2>
-            <h3>{`${car.price}$`}</h3>
+    <div className='wrapper'>
+        <div className='component'>
+            <h1 className='title' >Do you wanna Buy this car ?</h1>
+            <div className='details'>
+                <h2>{`${car.make} ${car.model}`}</h2>
+                <h3>{`${car.price}$`}</h3>
+            </div>
                 <form onSubmit={handleSubmit}>
                     
-                    <button>Confirm</button>
+                    <button className='offer-button'>Confirm</button>
                 </form>
-            <div>  
-                <button onClick={() => navigate('/car?id='+paramsId)}>Cancel</button>
+            <div >  
+                <button className='offer-button' onClick={() => navigate('/car?id='+paramsId)}>Cancel</button>
             </div>
         </div>
     </div>

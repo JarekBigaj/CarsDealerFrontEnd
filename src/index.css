@@ -8,13 +8,13 @@
 
 html {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.1em;
+    font-size: 0.9em;
     color: #fff;
 }
 
 body {
-    min-height: 100vh;
-    background-color: dodgerblue;
+
+    background-color: hsl(210, 0%, 50%);
 }
 
 .App {

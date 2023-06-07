@@ -3,10 +3,12 @@ import axios from '../api/axios';
 import useAuth, { accessToken } from '../hooks/useAuth';
 import CustomTable from '../helperComponents/CustomTable';
 import { getTableColumnName, getTableColumnNameForOffers } from '../helperFunctions/tableHelper';
+import '../styles/CarList.css'
 
 const URL_OFFER = '/api/offer/Offer/GetAllCarsOffer';
 const Offer = () => {
   const [offers, setOffers] = useState([]);
+  
   const {auth} = useAuth();
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const Offer = () => {
   })
 
   return (
-      <div>
+      <div className="table-wrapper">
         {offers.length?(
             <div>
               <CustomTable 
