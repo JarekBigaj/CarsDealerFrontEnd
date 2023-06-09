@@ -12,6 +12,8 @@ import RequireAuth from './RequireAuth';
 import MakeAnOffer from './Offer/MakeAnOffer';
 import Unauthorized from './Unauthorized';
 import FinallyTransaction from './Transaction/FinallyTransaction';
+import AddCar from './Administrator/Car/AddCar';
+import AcceptOffer from './Administrator/Offer/AcceptOffer';
 
 
 function App() {
@@ -32,6 +34,10 @@ function App() {
           <Route path='Transaction' element={<Transaction/>}  />
           <Route path='makeanoffer' element = {<MakeAnOffer/>}/>
           <Route path='finallytransaction' element = {<FinallyTransaction/>}/>
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"CarsDealer"}/>}>
+          <Route path='AddCar' element={<AddCar/>}/>
+          <Route path='AcceptOffer' element={<AcceptOffer/>}/>
         </Route>
       </Route>
     </Routes>

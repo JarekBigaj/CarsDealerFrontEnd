@@ -1,0 +1,54 @@
+/* Wrapper */
+.wrapper {
+    position: absolute;
+    top: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Component Wrapper */
+  .component-wrapper {
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    background-color: #222;
+    color: #fff;
+  }
+  
+  /* Car Form */
+  .car-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Car Label */
+  .car-label {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+  
+  /* Car Input */
+  .car-input {
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Form Button */
+  .form-button {
+    background-color: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .form-button:hover {
+    background-color: #ffa500;
+  }
+  

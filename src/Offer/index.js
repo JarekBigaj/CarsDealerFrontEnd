@@ -7,7 +7,7 @@ import '../styles/CarList.css'
 
 const URL_OFFER = '/api/offer/Offer/GetAllCarsOffer';
 const Offer = () => {
-  const [offers, setOffers] = useState([]);
+  const [carOffers, setCarOffers] = useState([]);
   
   const {auth} = useAuth();
 
@@ -24,19 +24,18 @@ const Offer = () => {
         const selectOffersData = data?.map((value) => {
           const {id,make,model,price,offers} = value;
           const [lastOffer] = offers?.slice(-1);
-          const idOffer = lastOffer.id;
-          const {proposedAmount,isAcepted} = lastOffer;
+          const idOffer = lastOffer?.id ? lastOffer.id : null;
+          const {proposedAmount,isAcepted} = lastOffer ? lastOffer:{proposedAmount:"",isAcepted:''};
           return {id,make,model,price,idOffer,proposedAmount,isAcepted};
         });
-        setOffers(()=>selectOffersData);
+        setCarOffers(()=>selectOffersData);
       } catch (err){
         console.error(err);
       }
     })()
-
   },[])
 
-  const propsName = getTableColumnName(offers);
+  const propsName = getTableColumnName(carOffers);
   const changedPropsName = propsName.map(name => {
     if(name === "idOffer") return "Id Your Offer";
     if(name === "proposedAmount") return "Your Propoused Price";
@@ -46,10 +45,10 @@ const Offer = () => {
 
   return (
       <div className="table-wrapper">
-        {offers.length?(
+        {carOffers.length?(
             <div>
               <CustomTable 
-                props={offers} 
+                props={carOffers} 
                 propsName={changedPropsName} 
                 title={"Your Offers List"}
                 isOffer={true}

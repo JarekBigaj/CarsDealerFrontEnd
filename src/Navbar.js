@@ -23,6 +23,15 @@ const Navbar = () => {
                     :
                     <></>
                 }
+                {roles === 'CarsDealer'?
+                    <>
+                        <CustomLink to={"/AddCar"}>Add Car</CustomLink>
+                        {/* <CustomLink to={"/AcceptOffer"}>Accept Offer</CustomLink> */}
+
+                    </>
+                    :
+                    <></>
+                }
                 {!accessToken?
                     <>
                         <CustomLink to={"/login"} >Login</CustomLink>
